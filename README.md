@@ -60,5 +60,5 @@ This is under active development at [Gogobot](http://gogobot.com), I definitely 
 
 ## Contibutors
 
-[@kensodev](http://twitter.com/kensodev) [Github](http://github.com/KensoDev)
+[@kensodev](http://twitter.com/kensodev) [Github](http://github.com/KensoDev)  
 [@kenegozi](http://twitter.com/kenegozi) [Github](http://github.com/kenegozi)
