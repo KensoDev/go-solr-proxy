@@ -36,7 +36,7 @@ func (s *ProxySuite) TestRoundRobin(c *C) {
 	defer srv2.Close()
 	target1 := srv1.URL
 	target2 := srv2.URL
-	proxy := NewProxy("MASTER", target1, target2)
+	proxy := NewProxy("MASTER", []string{target1, target2})
 
 	proxyWrapper := testutils.NewHandler(func(w http.ResponseWriter, req *http.Request) {
 		proxy.ServeHTTP(w, req)
