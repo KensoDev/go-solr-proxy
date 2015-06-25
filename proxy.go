@@ -1,71 +1,44 @@
 package proxy
 
 import (
-	"bytes"
 	log "github.com/Sirupsen/logrus"
-	"github.com/mailgun/oxy/forward"
-	"github.com/mailgun/oxy/roundrobin"
+	"github.com/Sirupsen/logrus/formatters/logstash"
 	"net/http"
-	"net/url"
 	"os"
+	"regexp"
 )
 
 func init() {
-	log.SetFormatter(&log.JSONFormatter{})
+	log.SetFormatter(&logstash.LogstashFormatter{Type: "solr-proxy"})
 	log.SetOutput(os.Stdout)
 }
 
 type Proxy struct {
-	proxy  http.Handler
-	lb     *roundrobin.RoundRobin
-	master string
-	err    error
+	updater *Updater
+	reader  *Reader
 }
 
-type RequestReader struct {
-	*bytes.Buffer
-}
+func NewProxy(master string, slaves []string) (p *Proxy) {
+	updater := NewUpdater(master)
+	reader := NewReader(slaves)
 
-func NewProxy(master string, slaves []string) *Proxy {
-	// oxy lb from slaves
-	fwd, err := forward.New()
-	lb, err := roundrobin.New(fwd)
-	if err != nil {
-		panic(err)
+	return &Proxy{
+		updater: updater,
+		reader:  reader,
 	}
-
-	for _, slave := range slaves {
-		slaveUrl, err := url.Parse(slave)
-		if err != nil {
-			panic(err)
-		}
-		log.Printf("Adding upsert server %v", slave)
-		lb.UpsertServer(slaveUrl)
-	}
-
-	return &Proxy{master: master, lb: lb}
-}
-
-type SmartUpdater struct {
-	fwd *forward.Forwarder
-}
-
-func (updater *SmartUpdater) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	log.Printf("Updating: %v", req.URL.Path)
-	updater.fwd.ServeHTTP(w, req)
 }
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	isUpdate := false // grep /update/ req.URL.Path
-	var next http.Handler
+	isUpdate, _ := regexp.MatchString("\\/solr\\/(\\S+)\\/update$", req.URL.Path)
+	log.Printf("url: %v %b", req.URL.Path, isUpdate)
 
 	if isUpdate {
-		fwd, _ := forward.New()
-		updater := &SmartUpdater{fwd: fwd}
-		next = updater
+		p.updater.ServeHTTP(w, req)
 	} else {
-		log.Printf("Reading: %v", req.URL.Path)
-		next = p.lb
+		p.reader.ServeHTTP(w, req)
 	}
-	next.ServeHTTP(w, req)
+}
+
+func writeLog(message string, params ...string) {
+	log.Printf(message, params)
 }
