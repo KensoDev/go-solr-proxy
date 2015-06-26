@@ -76,7 +76,9 @@ Flags:
                    Which AWS region should it use for the cache
   --aws-endpoint="https://s3-us-west-2.amazonaws.com"
                    AWS Endpoint for s3
-                   
+  --bucket-name=BUCKET-NAME
+                   What's the bucket name you want to save the documents in
+
 ```
 
 ## Development Status
