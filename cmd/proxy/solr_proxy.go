@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/kensodev/go-solr-proxy"
+	"github.com/KensoDev/go-solr-proxy"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"net/http"
 	"strings"
 )
 
 var (
-	listenPort   = kingpin.Flag("listen-port", "Which port should the proxy listen on").String()
+	listenPort   = kingpin.Flag("listen-port", "Which port should the proxy listen on").Int()
 	master       = kingpin.Flag("master", "Location to your master server").String()
 	slaves       = kingpin.Flag("slaves", "Comma separated list of servers that act as slaves").String()
 	awsRegion    = kingpin.Flag("aws-region", "Which AWS region should it use for the cache").Default("us-west-2").String()
@@ -31,12 +31,14 @@ func main() {
 		},
 	}
 
-	fmt.Printf("You have %s slaves", len(slaveServers))
+	fmt.Printf("You have %d slaves\n", len(slaveServers))
 
 	p := proxy.NewProxy(proxyConfig)
 	http.Handle("/", p)
 
-	if err := http.ListenAndServe(fmt.Sprintf(":%v", *listenPort), nil); err != nil {
+	fmt.Printf("Starting proxy on port %d\n", *listenPort)
+
+	if err := http.ListenAndServe(fmt.Sprintf(":%d", *listenPort), nil); err != nil {
 		panic(err)
 	}
 }
