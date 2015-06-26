@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/kensodev/go-solr-proxy"
+	"github.com/KensoDev/go-solr-proxy"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"net/http"
 	"strings"
