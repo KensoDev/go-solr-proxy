@@ -56,6 +56,25 @@ Now, you have a document cache that you can grab from and update a single field.
 
 Since there's no DB connection when reindexing the document, and there's no rebuilding of that XML, the update process is super fast.
 
+## Usage
+
+```
+
+usage: solr_proxy [<flags>]
+
+Flags:
+  --help           Show help (also see --help-long and --help-man).
+  --listen-port=LISTEN-PORT
+                   Which port should the proxy listen on
+  --master=MASTER  Location to your master server
+  --slaves=SLAVES  Comma separated list of servers that act as slaves
+  --aws-region="us-west-2"
+                   Which AWS region should it use for the cache
+  --aws-endpoint="https://s3-us-west-2.amazonaws.com"
+                   AWS Endpoint for s3
+                   
+```
+
 ## Development Status
 
 This is under active development at [Gogobot](http://gogobot.com), I definitely want to get this done in the upcoming weeks.
