@@ -9,14 +9,14 @@ import (
 )
 
 type ProxyConfig struct {
-	Master    string
-	Slaves    []string
-	AwsConfig *AWSConfig
+	Master      string
+	Slaves      []string
+	AwsConfig   *AWSConfig
+	LogLocation string
 }
 
 func init() {
 	log.SetFormatter(&logstash.LogstashFormatter{Type: "solr-proxy"})
-	log.SetOutput(os.Stdout)
 }
 
 type Proxy struct {
@@ -29,6 +29,16 @@ func NewProxy(proxyConfig *ProxyConfig) *Proxy {
 	updater := NewUpdater(proxyConfig.Master)
 	reader := NewReader(proxyConfig.Slaves)
 
+	if proxyConfig.LogLocation == "stdout" {
+		log.SetOutput(os.Stdout)
+	} else {
+		f, err := os.OpenFile(proxyConfig.LogLocation, os.O_WRONLY|os.O_CREATE, 0755)
+		if err != nil {
+			panic(err)
+		}
+		log.SetOutput(f)
+	}
+
 	return &Proxy{
 		updater: updater,
 		reader:  reader,
@@ -39,6 +49,7 @@ func NewProxy(proxyConfig *ProxyConfig) *Proxy {
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	isUpdate, _ := regexp.MatchString("\\/solr\\/(\\S+)\\/update$", req.URL.Path)
 	log.Printf("url: %v %b", req.URL.Path, isUpdate)
+	req.Close = true
 
 	if isUpdate {
 		p.updater.ServeHTTP(w, req, p.config.AwsConfig)
