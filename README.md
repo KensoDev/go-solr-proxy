@@ -1,6 +1,7 @@
 # Go SOLR Proxy
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/KensoDev/go-solr-proxy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build Status](https://travis-ci.org/KensoDev/go-solr-proxy.svg?branch=master)](https://travis-ci.org/KensoDev/go-solr-proxy)
 
 ## Why?
 
