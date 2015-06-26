@@ -1,8 +1,10 @@
 package proxy
 
 import (
+	"bytes"
 	"github.com/mailgun/oxy/forward"
 	"github.com/mailgun/oxy/roundrobin"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 )
@@ -26,6 +28,16 @@ func NewUpdater(master string) (updater *Updater) {
 }
 
 func (updater *Updater) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	buf, _ := ioutil.ReadAll(req.Body)
+	rdr1 := RequestReader{bytes.NewBuffer(buf)}
+	rdr2 := RequestReader{bytes.NewBuffer(buf)}
+	req.Body = rdr2
+
 	writeLog("Updating: %v", req.URL.Path)
 	updater.lb.ServeHTTP(w, req)
+
+	content, _ := ioutil.ReadAll(rdr1)
+	doc := ParseXMLDocument(content)
+	solrDoc := doc.GetSolrDocument()
+	solrDoc.Cache()
 }
