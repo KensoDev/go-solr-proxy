@@ -68,7 +68,7 @@ Since there's no DB connection when reindexing the document, and there's no rebu
 usage: solr_proxy [<flags>]
 
 Flags:
-  --help           Show help (also see --help-long and --help-man).
+    --help           Show help (also see --help-long and --help-man).
   --listen-port=LISTEN-PORT
                    Which port should the proxy listen on
   --master=MASTER  Location to your master server
@@ -79,6 +79,10 @@ Flags:
                    AWS Endpoint for s3
   --bucket-name=BUCKET-NAME
                    What's the bucket name you want to save the documents in
+  --log-location="stdout"
+                   Where do you want to keep logs
+  --bucket-prefix=BUCKET-PREFIX
+                   Prefix after the bucket name before the filename
 
 ```
 
