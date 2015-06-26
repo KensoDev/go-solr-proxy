@@ -22,9 +22,9 @@ func main() {
 	slaveServers := strings.Split(*slaves, ",")
 
 	proxyConfig := &proxy.ProxyConfig{
-		master: *master,
-		slaves: slaveServers,
-		awsConfig: &proxy.AWSConfig{
+		Master: *master,
+		Slaves: slaveServers,
+		AwsConfig: &proxy.AWSConfig{
 			BucketName: *s3BucketName,
 			S3Endpoint: *s3EndPoint,
 			RegionName: *awsRegion,
@@ -33,7 +33,7 @@ func main() {
 
 	fmt.Printf("You have %s slaves", len(slaveServers))
 
-	p := proxy.NewProxy(*master, slaveServers)
+	p := proxy.NewProxy(proxyConfig)
 	http.Handle("/", p)
 
 	if err := http.ListenAndServe(fmt.Sprintf(":%v", *listenPort), nil); err != nil {

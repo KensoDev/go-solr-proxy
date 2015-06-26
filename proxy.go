@@ -9,9 +9,9 @@ import (
 )
 
 type ProxyConfig struct {
-	master    string
-	slaves    []string
-	awsConfig *AWSConfig
+	Master    string
+	Slaves    []string
+	AwsConfig *AWSConfig
 }
 
 func init() {
@@ -26,14 +26,15 @@ type Proxy struct {
 }
 
 func NewProxy(proxyConfig *ProxyConfig) (p *Proxy) {
-	updater := NewUpdater(proxyConfig.master)
-	reader := NewReader(proxyConfig.slaves)
+	updater := NewUpdater(proxyConfig.Master)
+	reader := NewReader(proxyConfig.Slaves)
 
 	p = &Proxy{
 		updater: updater,
 		reader:  reader,
 		config:  proxyConfig,
 	}
+
 	return p
 }
 
@@ -42,7 +43,7 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	log.Printf("url: %v %b", req.URL.Path, isUpdate)
 
 	if isUpdate {
-		p.updater.ServeHTTP(w, req, p.config.awsConfig)
+		p.updater.ServeHTTP(w, req, p.config.AwsConfig)
 	} else {
 		p.reader.ServeHTTP(w, req)
 	}

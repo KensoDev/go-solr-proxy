@@ -2,13 +2,11 @@
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/KensoDev/go-solr-proxy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-This project is using [Readme Driven Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html).
-
-None of the features described here is fully/partialy working, once it is, the README will reflect it. If you have contributions or feedbacks please feel welcome to do so.
-
 ## Why?
 
-### Load Balancing
+We at [Gogobot](http://www.gogobot.com) are working heavily with SOLR and we had some really painful use cases with it that we wanted to solve.
+
+### 1. Load Balancing
 
 ![Solr Load Balancing](http://aviioblog.s3.amazonaws.com/solr-load-balancing.png)
 
@@ -16,7 +14,13 @@ We use multiple SOLR slaves and we want a way to load balance between them.
 
 Also, while backing up an instance we take down Jetty for that instance, meaning SOLR is basically down as far as the application is concerned, we want to put this in Standby mode until the backup is finished.
 
-### Partial update document cache
+### 2. Single configurable endpoint
+
+Since we are using SOLR heavily, we want to be able to switch out servers without deploying production or changing configuration files. We want a single access point to all servers that will be load balanced and the same for the master and all the slaves.
+
+This way, we can reindex a full cluster from scratch and just switch out production with no configuration change in the app.
+
+### 3. Partial update document cache
 
 Implementing Partial updates in SOLR is crucial for indexing speeds.
 
