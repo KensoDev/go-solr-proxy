@@ -1,1 +1,1 @@
-go run solr_proxy.go --master=http://192.168.99.98:8983 --slaves=http://192.168.99.98:8983,http://192.168.99.98:8983,http://192.168.99.98:8983 --listen-port=8982
+$GOPATH/bin/proxy --master=http://192.168.99.98:8983 --slaves=http://192.168.99.98:8983,http://192.168.99.98:8983,http://192.168.99.98:8983 --listen-port=8982
