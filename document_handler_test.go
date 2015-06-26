@@ -14,31 +14,43 @@ var _ = Suite(&DocumentSuite{})
 
 func (s *DocumentSuite) TestDocumentParser(c *C) {
 	content, _ := ioutil.ReadFile("document_sample.xml")
-	doc := ParseXMLDocument(content)
+	doc, err := ParseXMLDocument(content)
+	c.Assert(err, IsNil)
 	c.Assert(len(doc.Doc.Field), Equals, 56)
 }
 
 func (s *DocumentSuite) TestDocumentParserWithBadXml(c *C) {
 	content := []byte(`<commit />`)
-	doc := ParseXMLDocument(content)
+	doc, err := ParseXMLDocument(content)
+	c.Assert(err, IsNil)
+	c.Assert(len(doc.Doc.Field), Equals, 0)
+}
+
+func (s *DocumentSuite) TestDocumentParserWithEmptyBody(c *C) {
+	content := []byte("")
+	doc, err := ParseXMLDocument(content)
+	c.Assert(err, IsNil)
 	c.Assert(len(doc.Doc.Field), Equals, 0)
 }
 
 func (s *DocumentSuite) TestGetFieldValue(c *C) {
 	content, _ := ioutil.ReadFile("document_sample.xml")
-	doc := ParseXMLDocument(content)
+	doc, err := ParseXMLDocument(content)
+	c.Assert(err, IsNil)
 	c.Assert(doc.getFieldValue("id"), Equals, "Hotel 5000000000000")
 }
 
 func (s *DocumentSuite) TestGetFieldValueBlank(c *C) {
 	content, _ := ioutil.ReadFile("document_sample.xml")
-	doc := ParseXMLDocument(content)
+	doc, err := ParseXMLDocument(content)
+	c.Assert(err, IsNil)
 	c.Assert(doc.getFieldValue("id-missing"), Equals, "")
 }
 
 func (s *DocumentSuite) TestGetNameAndId(c *C) {
 	content, _ := ioutil.ReadFile("document_sample.xml")
-	doc := ParseXMLDocument(content)
+	doc, err := ParseXMLDocument(content)
+	c.Assert(err, IsNil)
 	name, id := doc.GetNameAndId()
 	c.Assert(name, Equals, "Hotel")
 	c.Assert(id, Equals, "5000000000000")
@@ -46,7 +58,8 @@ func (s *DocumentSuite) TestGetNameAndId(c *C) {
 
 func (s *DocumentSuite) TestSolrDocument(c *C) {
 	content, _ := ioutil.ReadFile("document_sample.xml")
-	doc := ParseXMLDocument(content)
+	doc, err := ParseXMLDocument(content)
+	c.Assert(err, IsNil)
 	solrDoc := doc.GetSolrDocument()
 	c.Assert(solrDoc.Id, Equals, "5000000000000")
 	c.Assert(solrDoc.Name, Equals, "Hotel")

@@ -29,15 +29,29 @@ func NewUpdater(master string) (updater *Updater) {
 
 func (updater *Updater) ServeHTTP(w http.ResponseWriter, req *http.Request, awsConfig *AWSConfig) {
 	buf, _ := ioutil.ReadAll(req.Body)
-	rdr1 := RequestReader{bytes.NewBuffer(buf)}
-	rdr2 := RequestReader{bytes.NewBuffer(buf)}
-	req.Body = rdr2
+	rdr := RequestReader{bytes.NewBuffer(buf)}
+	content, err := ioutil.ReadAll(rdr)
+	if err != nil {
+		http.Error(w, "Could not read request body\n"+err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	doc, err := ParseXMLDocument(content)
+	if err != nil {
+		http.Error(w, "Could not deserialize request body\n"+err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	solrDoc := doc.GetSolrDocument()
+	err = solrDoc.Cache(awsConfig)
+	if err != nil {
+		http.Error(w, "Could not cache solr document\n"+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	rdr = RequestReader{bytes.NewBuffer(buf)}
+	req.Body = rdr
 
 	writeLog("Updating: %v", req.URL.Path)
 	updater.lb.ServeHTTP(w, req)
-
-	content, _ := ioutil.ReadAll(rdr1)
-	doc := ParseXMLDocument(content)
-	solrDoc := doc.GetSolrDocument()
-	solrDoc.Cache(awsConfig)
 }

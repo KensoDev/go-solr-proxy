@@ -28,11 +28,14 @@ type DocField struct {
 	Value string `xml:",chardata"`
 }
 
-func ParseXMLDocument(content []byte) *Add {
+func ParseXMLDocument(content []byte) (*Add, error) {
 	a := new(Add)
-	xml.Unmarshal(content, a)
 	a.content = content
-	return a
+	var err error
+	if len(content) > 0 {
+		err = xml.Unmarshal(content, a)
+	}
+	return a, err
 }
 
 func (a *Add) getFieldValue(fieldName string) string {
@@ -64,9 +67,10 @@ func (d *Add) GetNameAndId() (string, string) {
 	return splits[0], splits[1]
 }
 
-func (d *SolrDocument) Cache(awsConfig *AWSConfig) {
+func (d *SolrDocument) Cache(awsConfig *AWSConfig) error {
 	if d.Name == "" {
-		return
+		// how should this case be handled?
+		return nil
 	}
 	documentName := fmt.Sprintf("%s/%s", d.Name, d.Id)
 	auth, _ := aws.EnvAuth()
@@ -74,7 +78,5 @@ func (d *SolrDocument) Cache(awsConfig *AWSConfig) {
 	svc := s3.New(auth, region)
 	bucketName := awsConfig.BucketName
 	bucket := svc.Bucket(bucketName)
-	err := bucket.Put(documentName, d.content, "text/xml", s3.AuthenticatedRead, s3.Options{})
-	if err != nil {
-	}
+	return bucket.Put(documentName, d.content, "text/xml", s3.AuthenticatedRead, s3.Options{})
 }

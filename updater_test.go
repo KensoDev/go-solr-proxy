@@ -29,7 +29,8 @@ func (s *UpdaterSuite) TestUpdaterRoundRobin(c *C) {
 	})
 	defer proxyWrapper.Close()
 
-	re, _, err := testutils.Get(proxyWrapper.URL, testutils.Headers(http.Header{}))
+	re, z, err := testutils.Get(proxyWrapper.URL, testutils.Headers(http.Header{}))
+	c.Logf("Z: %#+v", string(z))
 	c.Assert(err, IsNil)
 	c.Assert(re.StatusCode, Equals, http.StatusOK)
 	c.Assert(called1, Equals, true)
