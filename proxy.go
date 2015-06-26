@@ -29,11 +29,12 @@ func NewProxy(proxyConfig *ProxyConfig) (p *Proxy) {
 	updater := NewUpdater(proxyConfig.master)
 	reader := NewReader(proxyConfig.slaves)
 
-	return &Proxy{
+	p = &Proxy{
 		updater: updater,
 		reader:  reader,
 		config:  proxyConfig,
 	}
+	return p
 }
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
