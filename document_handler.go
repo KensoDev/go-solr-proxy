@@ -28,14 +28,14 @@ type DocField struct {
 	Value string `xml:",chardata"`
 }
 
-func ParseXMLDocument(content []byte) (d *Add) {
-	e := new(Add)
-	xml.Unmarshal(content, e)
-	e.content = content
-	return e
+func ParseXMLDocument(content []byte) *Add {
+	a := new(Add)
+	xml.Unmarshal(content, a)
+	a.content = content
+	return a
 }
 
-func (a *Add) getFieldValue(fieldName string) (v string) {
+func (a *Add) getFieldValue(fieldName string) string {
 	for _, field := range a.Doc.Field {
 		if field.Name == fieldName {
 			return field.Value
@@ -44,7 +44,7 @@ func (a *Add) getFieldValue(fieldName string) (v string) {
 	return ""
 }
 
-func (d *Add) GetSolrDocument() (solrDoc *SolrDocument) {
+func (d *Add) GetSolrDocument() *SolrDocument {
 	name, id := d.GetNameAndId()
 	return &SolrDocument{
 		Id:      id,
@@ -53,13 +53,14 @@ func (d *Add) GetSolrDocument() (solrDoc *SolrDocument) {
 	}
 }
 
-func (d *Add) GetNameAndId() (n string, id string) {
+func (d *Add) GetNameAndId() (string, string) {
 	value := d.getFieldValue("id")
 	splits := strings.Split(value, " ")
 
 	if len(splits) < 2 {
 		return "", ""
 	}
+
 	return splits[0], splits[1]
 }
 
@@ -67,7 +68,7 @@ func (d *SolrDocument) Cache(awsConfig *AWSConfig) {
 	if d.Name == "" {
 		return
 	}
-	documentName := fmt.Sprintf("%v/%v", d.Name, d.Id)
+	documentName := fmt.Sprintf("%s/%s", d.Name, d.Id)
 	auth, _ := aws.EnvAuth()
 	region := aws.Region{Name: awsConfig.RegionName, S3Endpoint: awsConfig.S3Endpoint}
 	svc := s3.New(auth, region)

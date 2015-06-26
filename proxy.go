@@ -25,17 +25,15 @@ type Proxy struct {
 	config  *ProxyConfig
 }
 
-func NewProxy(proxyConfig *ProxyConfig) (p *Proxy) {
+func NewProxy(proxyConfig *ProxyConfig) *Proxy {
 	updater := NewUpdater(proxyConfig.Master)
 	reader := NewReader(proxyConfig.Slaves)
 
-	p = &Proxy{
+	return &Proxy{
 		updater: updater,
 		reader:  reader,
 		config:  proxyConfig,
 	}
-
-	return p
 }
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
