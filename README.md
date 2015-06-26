@@ -1,5 +1,7 @@
 # Go SOLR Proxy
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/KensoDev/go-solr-proxy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 This project is using [Readme Driven Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html).
 
 None of the features described here is fully/partialy working, once it is, the README will reflect it. If you have contributions or feedbacks please feel welcome to do so.

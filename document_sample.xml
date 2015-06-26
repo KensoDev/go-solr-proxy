@@ -1,17 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?><add><doc boost="0.5"><field name="id">Restaurant 4000000690324</field><field name="type">Restaurant</field><field name="type">Poi</field><field name="type">ActiveRecord::Base</field><field name="class_name">Restaurant</field><field name="name_ss">Millennium</field><field name=
-"location_suffix_ss">San Francisco, California, USA</field><field name="formatted_address_ss">580 Geary Street, San Francisco, CA 94102, United States</field><field name="travel_unit_name_ss">San Francisco, California</field><field name="travel_unit_id_ls">2000000000084</field><field name="search_title_ss">Millenni
-um, San Francisco, California, USA</field><field name="url_ss">/millennium-san-francisco-restaurant_3</field><field name="item_id_ls">4000000690324</field><field name="item_type_ss">Restaurant</field><field name="lat_es">37.786961</field><field name="lng_es">-122.413015</field><field name="location_s">9q8yyqvt4006<
-/field><field name="location_ll">37.786961,-122.413015</field><field name="has_pictures_bs">false</field><field name="review_count_is">1</field><field name="has_street_view_thumb_bs">true</field><field name="show_on_map_bs">true</field><field name="thumb_url_ss">https://cbk0.google.com/cbk?output=thumbnail&amp;w=24
-0&amp;h=180&amp;thumb=2&amp;onerr=4&amp;ll=37.786961,-122.413015</field><field name="thumb_medium_ss">https://cbk0.google.com/cbk?output=thumbnail&amp;w=240&amp;h=180&amp;thumb=2&amp;onerr=4&amp;ll=37.786961,-122.413015</field><field name="phone_ss"/><field name="popular_rank_is">999999999</field><field name="relev
-ance_score_ls">0</field><field name="total_visits_count_is">0</field><field name="geohash_1_ss">9</field><field name="geohash_2_ss">9q</field><field name="geohash_3_ss">9q8</field><field name="geohash_4_ss">9q8y</field><field name="geohash_5_ss">9q8yy</field><field name="geohash_6_ss">9q8yyq</field><field name="geo
-hash_7_ss">9q8yyqv</field><field name="geohash_8_ss">9q8yyqvt</field><field name="geohash_9_ss">9q8yyqvt4</field><field name="geohash_10_ss">9q8yyqvt40</field><field name="geohash_11_ss">9q8yyqvt400</field><field name="geohash_12_ss">9q8yyqvt4006</field><field name="tribe_1000000000001_score_ls">0</field><field nam
-e="tribe_1000000000001_histogram_is">0</field><field name="tribe_1000000000002_score_ls">0</field><field name="tribe_1000000000002_histogram_is">0</field><field name="tribe_1000000000003_score_ls">0</field><field name="tribe_1000000000003_histogram_is">0</field><field name="tribe_1000000000004_score_ls">0</field><f
-ield name="tribe_1000000000004_histogram_is">0</field><field name="tribe_1000000000005_score_ls">0</field><field name="tribe_1000000000005_histogram_is">0</field><field name="tribe_1000000000006_score_ls">0</field><field name="tribe_1000000000006_histogram_is">0</field><field name="tribe_1000000000007_score_ls">0</
-field><field name="tribe_1000000000007_histogram_is">0</field><field name="tribe_1000000000008_score_ls">0</field><field name="tribe_1000000000008_histogram_is">0</field><field name="tribe_1000000000009_score_ls">0</field><field name="tribe_1000000000009_histogram_is">0</field><field name="tribe_1000000000010_score
-_ls">0</field><field name="tribe_1000000000010_histogram_is">0</field><field name="tribe_1000000000011_score_ls">0</field><field name="tribe_1000000000011_histogram_is">0</field><field name="tribe_1000000000012_score_ls">0</field><field name="tribe_1000000000012_histogram_is">0</field><field name="tribe_10000000000
-13_score_ls">0</field><field name="tribe_1000000000013_histogram_is">0</field><field name="tribe_1000000000014_score_ls">0</field><field name="tribe_1000000000014_histogram_is">0</field><field name="tribe_1000000000015_score_ls">0</field><field name="tribe_1000000000015_histogram_is">0</field><field name="tribe_100
-0000000016_score_ls">0</field><field name="tribe_1000000000016_histogram_is">0</field><field name="tribe_1000000000017_score_ls">0</field><field name="tribe_1000000000017_histogram_is">0</field><field name="tribe_1000000000019_score_ls">0</field><field name="tribe_1000000000019_histogram_is">0</field><field name="t
-ribe_1000000000020_score_ls">0</field><field name="tribe_1000000000020_histogram_is">0</field><field name="world_region_id_l">2000000056596</field><field name="country_id_l">2000000000000</field><field name="state_id_l">2000000000009</field><field name="province_area1_id_l">2000000057151</field><field name="city_id
-_ls">2000000000084</field><field name="city_name_ss">San Francisco</field><field name="user_price_range_is">0</field><field name="structured_hours_ss">[]</field><field boost="400" name="name_text">Millennium</field><field boost="200" name="name_textp">Millennium</field><field boost="50" name="fuzzy_soundex">Millenn
-ium</field><field name="fuzzy_metaphone">Millennium</field><field boost="10" name="location_suffix_text">San Francisco, California, USA</field><field name="location_suffix_textp">San Francisco, California, USA</field><field boost="10" name="travel_unit_name_text">San Francisco, California</field><field boost="100"
-name="region_aliases_text">USA US SF S.F. Frisco</field><field name="type_name_text">Restaurant</field><field boost="20" name="categories_text"/><field boost="20" name="cuisines_text"/></doc></add>
+<?xml version="1.0" encoding="UTF-8"?>
+<add>
+	<doc boost="150.51500000000001">
+		<field name="id">Hotel 5000000000000</field>
+		<field name="type">Hotel</field>
+		<field name="type">Poi</field>
+		<field name="type">ActiveRecord::Base</field>
+		<field name="class_name">Hotel</field>
+		<field name="name_ss">Casa Grande Mountain Retreat</field>
+		<field name="location_suffix_ss">Jayuya, Puerto Rico</field>
+		<field name="formatted_address_ss">Road 612, Km. 0.3 | Barrio Caonillas, Utuado, 00641, Puerto Rico</field>
+		<field name="travel_unit_name_ss">Puerto Rico</field>
+		<field name="travel_unit_id_ls">2000000000160</field>
+		<field name="search_title_ss">Casa Grande Mountain Retreat, Jayuya, Puerto Rico</field>
+		<field name="url_ss">/casa-grande-mountain-retreat-jayuya-hotel</field>
+		<field name="item_type_ss">Hotel</field>
+		<field name="lat_es">18.2065151</field>
+		<field name="lng_es">-66.6146958</field>
+		<field name="location_s">de0xs4ksth6s</field>
+		<field name="location_ll">18.2065151,-66.6146958</field>
+		<field name="description_ss"/>
+		<field name="user_avg_rating_es">5.0</field>
+		<field name="has_pictures_bs">false</field>
+		<field name="review_count_is">1</field>
+		<field name="website_ss"/>
+		<field name="has_street_view_thumb_bs">false</field>
+		<field name="show_on_map_bs">true</field>
+		<field name="thumb_url_ss">https://cdn.gbot.me/img/transparent.png</field>
+		<field name="thumb_medium_ss">https://cdn.gbot.me/img/transparent.png</field>
+		<field name="phone_ss"/>
+		<field name="popular_rank_is">1</field>
+		<field name="relevance_score_ls">10001</field>
+		<field name="total_visits_count_is">1</field>
+		<field name="geohash_1_ss">d</field>
+		<field name="geohash_2_ss">de</field>
+		<field name="geohash_3_ss">de0</field>
+		<field name="geohash_4_ss">de0x</field>
+		<field name="geohash_5_ss">de0xs</field>
+		<field name="geohash_6_ss">de0xs4</field>
+		<field name="geohash_7_ss">de0xs4k</field>
+		<field name="geohash_8_ss">de0xs4ks</field>
+		<field name="geohash_9_ss">de0xs4kst</field>
+		<field name="geohash_10_ss">de0xs4ksth</field>
+		<field name="geohash_11_ss">de0xs4ksth6</field>
+		<field name="geohash_12_ss">de0xs4ksth6s</field>
+		<field name="review_snippets_sms">An amazing hotel! The lobby is 4 acres of tropical gardens &amp; waterways under a huge glass roof. It's split into 4 sections including Key West &amp; Everglades. Go even if only for lunch so you can see the interior of this place, it's like nothing I've ever seen before or since!</field>
+		<field name="review_snippet_ss">An amazing hotel! The lobby is 4 acres of tropical gardens &amp; waterways under a huge glass roof. It's split into 4 sections including Key West &amp; Everglades. Go even if only for lunch so you can see the interior of this place, it's like nothing I've ever seen before or since!</field>
+		<field name="review_snippet_objects_sms">3000000000010453</field>
+		<field name="review_snippet_obj_ss">3000000000010453</field>
+		<field boost="400" name="name_text">Casa Grande Mountain Retreat</field>
+		<field boost="200" name="name_textp">Casa Grande Mountain Retreat</field>
+		<field boost="0.2" name="fuzzy_soundex">Casa Grande Mountain Retreat</field>
+		<field boost="0.1" name="fuzzy_metaphone">Casa Grande Mountain Retreat</field>
+		<field boost="10" name="location_suffix_text">Jayuya, Puerto Rico</field>
+		<field name="location_suffix_textp">Jayuya, Puerto Rico</field>
+		<field boost="10" name="travel_unit_name_text">Puerto Rico</field>
+		<field boost="100" name="region_aliases_text"/>
+		<field name="type_name_text">Hotel</field>
+		<field boost="20" name="categories_text">Hotels and Resorts</field>
+	</doc>
+</add>
