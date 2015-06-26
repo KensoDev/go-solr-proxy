@@ -81,11 +81,15 @@ Flags:
 
 ```
 
-## Development Status
+## Status
 
-This is under active development at [Gogobot](http://gogobot.com), I definitely want to get this done in the upcoming weeks.
+This is under active development at [Gogobot](http://gogobot.com).
+
+We are currently testing it on staging and a small percentage of production traffic.  
+Once this is running all production traffic, I will release 1.0 with some benchmarks and data.
 
 ## Contibutors
 
-[@kensodev](http://twitter.com/kensodev) [Github](http://github.com/KensoDev)  
-[@kenegozi](http://twitter.com/kenegozi) [Github](http://github.com/kenegozi)
+* [@kensodev](http://twitter.com/kensodev) [Github](http://github.com/KensoDev)  
+* [@kenegozi](http://twitter.com/kenegozi) [Github](http://github.com/kenegozi)
+  Even though Ken is not in the commit logs (yet) he contributed a lot. We paired and he contributed a lot of feedback and insights. 
