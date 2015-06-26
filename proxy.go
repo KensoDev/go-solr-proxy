@@ -8,6 +8,12 @@ import (
 	"regexp"
 )
 
+type ProxyConfig struct {
+	master    string
+	slaves    []string
+	awsConfig *AWSConfig
+}
+
 func init() {
 	log.SetFormatter(&logstash.LogstashFormatter{Type: "solr-proxy"})
 	log.SetOutput(os.Stdout)
@@ -16,15 +22,17 @@ func init() {
 type Proxy struct {
 	updater *Updater
 	reader  *Reader
+	config  *ProxyConfig
 }
 
-func NewProxy(master string, slaves []string) (p *Proxy) {
-	updater := NewUpdater(master)
-	reader := NewReader(slaves)
+func NewProxy(proxyConfig *ProxyConfig) (p *Proxy) {
+	updater := NewUpdater(proxyConfig.master)
+	reader := NewReader(proxyConfig.slaves)
 
 	return &Proxy{
 		updater: updater,
 		reader:  reader,
+		config:  proxyConfig,
 	}
 }
 
@@ -33,7 +41,7 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	log.Printf("url: %v %b", req.URL.Path, isUpdate)
 
 	if isUpdate {
-		p.updater.ServeHTTP(w, req)
+		p.updater.ServeHTTP(w, req, p.config.awsConfig)
 	} else {
 		p.reader.ServeHTTP(w, req)
 	}

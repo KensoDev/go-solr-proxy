@@ -25,7 +25,7 @@ func (s *UpdaterSuite) TestUpdaterRoundRobin(c *C) {
 	updater := NewUpdater(srv1.URL)
 
 	proxyWrapper := testutils.NewHandler(func(w http.ResponseWriter, req *http.Request) {
-		updater.ServeHTTP(w, req)
+		updater.ServeHTTP(w, req, &AWSConfig{})
 	})
 	defer proxyWrapper.Close()
 

@@ -63,17 +63,17 @@ func (d *Add) GetNameAndId() (n string, id string) {
 	return splits[0], splits[1]
 }
 
-func (d *SolrDocument) Cache() {
+func (d *SolrDocument) Cache(awsConfig *AWSConfig) {
 	if d.Name == "" {
 		return
 	}
 	documentName := fmt.Sprintf("%v/%v", d.Name, d.Id)
 	auth, _ := aws.EnvAuth()
-	region := aws.Region{Name: "us-west-2", S3Endpoint: "https://s3-us-west-2.amazonaws.com"}
+	region := aws.Region{Name: awsConfig.RegionName, S3Endpoint: awsConfig.S3Endpoint}
 	svc := s3.New(auth, region)
-	bucketName := "gogobot-solr-docs"
+	bucketName := awsConfig.BucketName
 	bucket := svc.Bucket(bucketName)
-	err := bucket.Put(documentName, d.content, "", s3.AuthenticatedRead, s3.Options{})
+	err := bucket.Put(documentName, d.content, "text/xml", s3.AuthenticatedRead, s3.Options{})
 	if err != nil {
 	}
 }
