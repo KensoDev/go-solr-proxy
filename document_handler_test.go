@@ -64,3 +64,27 @@ func (s *DocumentSuite) TestSolrDocument(c *C) {
 	c.Assert(solrDoc.Id, Equals, "5000000000000")
 	c.Assert(solrDoc.Name, Equals, "Hotel")
 }
+
+func (s *DocumentSuite) TestDocumentNameWithBucketPrevix(c *C) {
+	doc := &SolrDocument{
+		Id:      "1",
+		Name:    "Hotel",
+		content: []byte(""),
+	}
+	config := &AWSConfig{
+		BucketPrefix: "staging",
+	}
+	documentName := doc.GetDocumentName(config)
+	c.Assert(documentName, Equals, "staging/Hotel/1")
+}
+
+func (s *DocumentSuite) TestDocumentNameWithoutBucketPrefix(c *C) {
+	doc := &SolrDocument{
+		Id:      "1",
+		Name:    "Hotel",
+		content: []byte(""),
+	}
+	config := &AWSConfig{}
+	documentName := doc.GetDocumentName(config)
+	c.Assert(documentName, Equals, "Hotel/1")
+}

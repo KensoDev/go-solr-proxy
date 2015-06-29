@@ -2,9 +2,9 @@ package proxy
 
 import (
 	"encoding/xml"
-	"fmt"
 	"github.com/goamz/goamz/aws"
 	"github.com/goamz/goamz/s3"
+	"path/filepath"
 	"strings"
 )
 
@@ -69,14 +69,18 @@ func (d *Add) GetNameAndId() (string, string) {
 
 func (d *SolrDocument) Cache(awsConfig *AWSConfig) error {
 	if d.Name == "" {
-		// how should this case be handled?
+		// TODO: how should this case be handled?
 		return nil
 	}
-	documentName := fmt.Sprintf("%s/%s", d.Name, d.Id)
+	documentName := d.GetDocumentName(awsConfig)
 	auth, _ := aws.EnvAuth()
 	region := aws.Region{Name: awsConfig.RegionName, S3Endpoint: awsConfig.S3Endpoint}
 	svc := s3.New(auth, region)
 	bucketName := awsConfig.BucketName
 	bucket := svc.Bucket(bucketName)
 	return bucket.Put(documentName, d.content, "text/xml", s3.AuthenticatedRead, s3.Options{})
+}
+
+func (d *SolrDocument) GetDocumentName(awsConfig *AWSConfig) string {
+	return filepath.Join(awsConfig.BucketPrefix, d.Name, d.Id)
 }
