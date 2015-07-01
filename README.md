@@ -86,6 +86,20 @@ Flags:
 
 ```
 
+### View configuration when running
+
+When the proxy is running it has a web-accesible configuration JSON.  
+You can access it by going to `/proxy/configuration`.
+
+It looks like this:
+
+![Proxy Configuration](http://aviioblog.s3.amazonaws.com/screen-shot-2015-06-30-i4isg.png)
+
+## CHANGELOG
+
+[View Here](CHANGELOG.md)
+
+
 ## Status
 
 This is under active development at [Gogobot](http://gogobot.com).

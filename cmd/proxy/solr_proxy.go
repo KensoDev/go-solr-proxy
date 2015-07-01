@@ -35,12 +35,11 @@ func main() {
 		},
 	}
 
-	fmt.Printf("You have %d slaves\n", len(slaveServers))
+	config := proxy.NewConfigurationRender(proxyConfig)
+	http.Handle("/proxy/configuration", config)
 
 	p := proxy.NewProxy(proxyConfig)
 	http.Handle("/", p)
-
-	fmt.Printf("Starting proxy on port %d\n", *listenPort)
 
 	if err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", *listenPort), nil); err != nil {
 		panic(err)
