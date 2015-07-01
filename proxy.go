@@ -48,7 +48,6 @@ func NewProxy(proxyConfig *ProxyConfig) *Proxy {
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	isUpdate, _ := regexp.MatchString("\\/solr\\/(\\S+)\\/update$", req.URL.Path)
-	log.Printf("url: %v %b", req.URL.Path, isUpdate)
 	req.Close = true
 
 	if isUpdate {
