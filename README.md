@@ -3,6 +3,8 @@
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/KensoDev/go-solr-proxy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Build Status](https://travis-ci.org/KensoDev/go-solr-proxy.svg?branch=master)](https://travis-ci.org/KensoDev/go-solr-proxy)
 
+Production ready docker friendly proxy/document cache/load balancer for SOLR servers.
+
 ## Why?
 
 We at [Gogobot](http://www.gogobot.com) are working heavily with SOLR and we had some really painful use cases with it that we wanted to solve.
@@ -34,7 +36,7 @@ This linked documentation mentions this limitation pretty clearly
 ![SOLR Partial updates](http://aviioblog.s3.amazonaws.com/screen-shot-2015-06-16-gh6de.png)
 
 
-### Getting around that limitation
+#### Getting around that limitation
 
 ElasticSearch bypasses this limitation smartly
 
@@ -94,6 +96,11 @@ You can access it by going to `/proxy/configuration`.
 It looks like this:
 
 ![Proxy Configuration](http://aviioblog.s3.amazonaws.com/screen-shot-2015-06-30-i4isg.png)
+
+## Deployment (Docker)
+
+Checkout [docker](docker) for more details.
+
 
 ## CHANGELOG
 
