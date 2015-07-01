@@ -13,7 +13,7 @@ type DocumentSuite struct{}
 var _ = Suite(&DocumentSuite{})
 
 func (s *DocumentSuite) TestDocumentParser(c *C) {
-	content, _ := ioutil.ReadFile("document_sample.xml")
+	content, _ := ioutil.ReadFile("fixtures/document_sample.xml")
 	doc, err := ParseXMLDocument(content)
 	c.Assert(err, IsNil)
 	c.Assert(len(doc.Doc.Field), Equals, 56)
@@ -34,21 +34,21 @@ func (s *DocumentSuite) TestDocumentParserWithEmptyBody(c *C) {
 }
 
 func (s *DocumentSuite) TestGetFieldValue(c *C) {
-	content, _ := ioutil.ReadFile("document_sample.xml")
+	content, _ := ioutil.ReadFile("fixtures/document_sample.xml")
 	doc, err := ParseXMLDocument(content)
 	c.Assert(err, IsNil)
 	c.Assert(doc.getFieldValue("id"), Equals, "Hotel 5000000000000")
 }
 
 func (s *DocumentSuite) TestGetFieldValueBlank(c *C) {
-	content, _ := ioutil.ReadFile("document_sample.xml")
+	content, _ := ioutil.ReadFile("fixtures/document_sample.xml")
 	doc, err := ParseXMLDocument(content)
 	c.Assert(err, IsNil)
 	c.Assert(doc.getFieldValue("id-missing"), Equals, "")
 }
 
 func (s *DocumentSuite) TestGetNameAndId(c *C) {
-	content, _ := ioutil.ReadFile("document_sample.xml")
+	content, _ := ioutil.ReadFile("fixtures/document_sample.xml")
 	doc, err := ParseXMLDocument(content)
 	c.Assert(err, IsNil)
 	name, id := doc.GetNameAndId()
@@ -57,7 +57,7 @@ func (s *DocumentSuite) TestGetNameAndId(c *C) {
 }
 
 func (s *DocumentSuite) TestSolrDocument(c *C) {
-	content, _ := ioutil.ReadFile("document_sample.xml")
+	content, _ := ioutil.ReadFile("fixtures/document_sample.xml")
 	doc, err := ParseXMLDocument(content)
 	c.Assert(err, IsNil)
 	solrDoc := doc.GetSolrDocument()
