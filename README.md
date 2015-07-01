@@ -68,7 +68,7 @@ Since there's no DB connection when reindexing the document, and there's no rebu
 usage: solr_proxy [<flags>]
 
 Flags:
-    --help           Show help (also see --help-long and --help-man).
+  --help           Show help (also see --help-long and --help-man).
   --listen-port=LISTEN-PORT
                    Which port should the proxy listen on
   --master=MASTER  Location to your master server

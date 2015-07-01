@@ -4,4 +4,5 @@
   --bucket-name=gogobot-solr-docs \
   --aws-region=us-west-2 \
   --aws-endpoint=https://s3-us-west-2.amazonaws.com \
+  --bucket-prefix=kensodev-dev \
   --listen-port=8982

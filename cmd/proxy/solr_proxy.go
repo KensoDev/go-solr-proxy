@@ -42,7 +42,7 @@ func main() {
 
 	fmt.Printf("Starting proxy on port %d\n", *listenPort)
 
-	if err := http.ListenAndServe(fmt.Sprintf(":%d", *listenPort), nil); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", *listenPort), nil); err != nil {
 		panic(err)
 	}
 }
