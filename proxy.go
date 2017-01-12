@@ -2,7 +2,6 @@ package proxy
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/Sirupsen/logrus/formatters/logstash"
 	"net/http"
 	"os"
 	"regexp"
@@ -16,7 +15,7 @@ type ProxyConfig struct {
 }
 
 func init() {
-	log.SetFormatter(&logstash.LogstashFormatter{Type: "solr-proxy"})
+	log.SetFormatter(&log.JSONFormatter{})
 }
 
 type Proxy struct {
