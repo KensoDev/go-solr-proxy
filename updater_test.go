@@ -20,13 +20,15 @@ func (s *UpdaterSuite) TestUpdaterRoundRobin(c *C) {
 	srv1 := testutils.NewHandler(func(w http.ResponseWriter, req *http.Request) {
 		called1 = true
 	})
+
 	defer srv1.Close()
 
 	updater := NewUpdater(srv1.URL)
 
 	proxyWrapper := testutils.NewHandler(func(w http.ResponseWriter, req *http.Request) {
-		updater.ServeHTTP(w, req, &AWSConfig{})
+		updater.ServeHTTP(w, req, &AWSConfig{}, "collection1")
 	})
+
 	defer proxyWrapper.Close()
 
 	re, z, err := testutils.Get(proxyWrapper.URL, testutils.Headers(http.Header{}))

@@ -60,7 +60,7 @@ func (s *DocumentSuite) TestSolrDocument(c *C) {
 	content, _ := ioutil.ReadFile("fixtures/document_sample.xml")
 	doc, err := ParseXMLDocument(content)
 	c.Assert(err, IsNil)
-	solrDoc := doc.GetSolrDocument()
+	solrDoc := doc.GetSolrDocument("collection1")
 	c.Assert(solrDoc.Id, Equals, "5000000000000")
 	c.Assert(solrDoc.Name, Equals, "Hotel")
 }
@@ -87,4 +87,16 @@ func (s *DocumentSuite) TestDocumentNameWithoutBucketPrefix(c *C) {
 	config := &AWSConfig{}
 	documentName := doc.GetDocumentName(config)
 	c.Assert(documentName, Equals, "Hotel/1")
+}
+
+func (s *DocumentSuite) TestDocumentNameWithCoreName(c *C) {
+	doc := &SolrDocument{
+		Core:    "collection1",
+		Id:      "1",
+		Name:    "Hotel",
+		content: []byte(""),
+	}
+	config := &AWSConfig{}
+	documentName := doc.GetDocumentName(config)
+	c.Assert(documentName, Equals, "collection1/Hotel/1")
 }

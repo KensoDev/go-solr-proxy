@@ -47,11 +47,13 @@ func NewProxy(proxyConfig *ProxyConfig) *Proxy {
 }
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	isUpdate, _ := regexp.MatchString("\\/solr\\/(\\S+)\\/update$", req.URL.Path)
+	re := regexp.MustCompile("\\/solr\\/(.*)\\/update$")
+	matches := re.FindStringSubmatch(req.URL.Path)
+
 	req.Close = true
 
-	if isUpdate {
-		p.updater.ServeHTTP(w, req, p.config.AwsConfig)
+	if len(matches) > 0 {
+		p.updater.ServeHTTP(w, req, p.config.AwsConfig, matches[1])
 	} else {
 		p.reader.ServeHTTP(w, req)
 	}

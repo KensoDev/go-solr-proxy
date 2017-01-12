@@ -1,13 +1,12 @@
 # Go SOLR Proxy
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/KensoDev/go-solr-proxy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Build Status](https://travis-ci.org/KensoDev/go-solr-proxy.svg?branch=master)](https://travis-ci.org/KensoDev/go-solr-proxy)
 
 Production ready docker friendly proxy/document cache/load balancer for SOLR servers.
 
 ## Why?
 
-We at [Gogobot](http://www.gogobot.com) are working heavily with SOLR and we had some really painful use cases with it that we wanted to solve.
+We at [Trip.com](https://www.trip.com.com) are working heavily with SOLR and we had some really painful use cases with it that we wanted to solve.
 
 ### 1. Load Balancing
 
@@ -109,7 +108,7 @@ Checkout [docker](docker) for more details.
 
 ## Status
 
-This is under active development at [Gogobot](http://gogobot.com).
+This is under active development at [Trip.com](https://www.trip.com).
 
 We are currently testing it on staging and a small percentage of production traffic.  
 Once this is running all production traffic, I will release 1.0 with some benchmarks and data.

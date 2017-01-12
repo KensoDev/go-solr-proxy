@@ -1,8 +1,9 @@
 package proxy
 
 type AWSConfig struct {
-	RegionName   string
-	S3Endpoint   string
-	BucketName   string
-	BucketPrefix string
+	RegionName    string
+	S3Endpoint    string
+	BucketName    string
+	BucketPrefix  string
+	DisableUpload bool
 }

@@ -9,6 +9,7 @@ import (
 )
 
 type SolrDocument struct {
+	Core    string
 	Id      string
 	Name    string
 	content []byte
@@ -47,9 +48,11 @@ func (a *Add) getFieldValue(fieldName string) string {
 	return ""
 }
 
-func (d *Add) GetSolrDocument() *SolrDocument {
+func (d *Add) GetSolrDocument(CoreName string) *SolrDocument {
 	name, id := d.GetNameAndId()
+
 	return &SolrDocument{
+		Core:    CoreName,
 		Id:      id,
 		Name:    name,
 		content: d.content,
@@ -82,5 +85,5 @@ func (d *SolrDocument) Cache(awsConfig *AWSConfig) error {
 }
 
 func (d *SolrDocument) GetDocumentName(awsConfig *AWSConfig) string {
-	return filepath.Join(awsConfig.BucketPrefix, d.Name, d.Id)
+	return filepath.Join(awsConfig.BucketPrefix, d.Core, d.Name, d.Id)
 }
