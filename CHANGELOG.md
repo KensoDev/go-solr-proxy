@@ -1,3 +1,8 @@
+## 1.0.2
+
+* [@KensoDev] - 2017/01/12 - Adding the `Version` to the `ProxyConfiguration`
+  so it will be sent with the json
+
 ## 1.0.0
 
 * [@KensoDev] - 2016/01/11 - Multiple big changes

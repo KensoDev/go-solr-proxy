@@ -1,8 +1,8 @@
 package proxy
 
 import (
-	"github.com/mailgun/oxy/forward"
-	"github.com/mailgun/oxy/roundrobin"
+	"github.com/vulcand/oxy/forward"
+	"github.com/vulcand/oxy/roundrobin"
 	"net/http"
 	"net/url"
 )
@@ -13,7 +13,8 @@ type Reader struct {
 }
 
 func NewReader(slaves []string) (r *Reader) {
-	fwd, err := forward.New()
+	setter := forward.PassHostHeader(true)
+	fwd, err := forward.New(setter)
 	lb, err := roundrobin.New(fwd)
 
 	if err != nil {

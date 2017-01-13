@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/KensoDev/go-solr-proxy"
 	"gopkg.in/alecthomas/kingpin.v2"
+	"io/ioutil"
 	"net/http"
 	"strings"
 )
@@ -28,6 +29,7 @@ func main() {
 		Master:      *master,
 		Slaves:      slaveServers,
 		LogLocation: *logLocation,
+		Version:     "1.0.1",
 		AwsConfig: &proxy.AWSConfig{
 			BucketName:    *s3BucketName,
 			S3Endpoint:    *s3EndPoint,
@@ -40,10 +42,27 @@ func main() {
 	config := proxy.NewConfigurationRender(proxyConfig)
 	http.Handle("/proxy/configuration", config)
 
+	pinger := &Pinger{}
+	http.Handle("/ping", pinger)
+
 	p := proxy.NewProxy(proxyConfig)
 	http.Handle("/", p)
 
-	if err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", *listenPort), nil); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf(":%d", *listenPort), nil); err != nil {
 		panic(err)
 	}
+}
+
+type Pinger struct{}
+
+func (c *Pinger) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	resp, err := http.Get("http://localhost:8982/solr/zh/select?q=*%3A*&wt=json&indent=true")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+
+	w.Write(body)
 }

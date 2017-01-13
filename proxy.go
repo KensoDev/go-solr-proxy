@@ -1,6 +1,7 @@
 package proxy
 
 import (
+	"fmt"
 	log "github.com/Sirupsen/logrus"
 	"net/http"
 	"os"
@@ -12,6 +13,7 @@ type ProxyConfig struct {
 	Slaves      []string
 	AwsConfig   *AWSConfig
 	LogLocation string
+	Version     string
 }
 
 func init() {
@@ -46,6 +48,9 @@ func NewProxy(proxyConfig *ProxyConfig) *Proxy {
 }
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	fmt.Println(req.URL.Path)
+	fmt.Println(req.URL.RawQuery)
+
 	re := regexp.MustCompile("\\/solr\\/(.*)\\/update$")
 	matches := re.FindStringSubmatch(req.URL.Path)
 
